@@ -45,32 +45,6 @@ class MainWindow:
 
 	def _click(self, event):
 		print('click event')
-		#print(event)
-		#click(click)
-	#print('resizeAp')
-"""
-root = Tk()
-root.title('Test application')
-root.geometry('600x400')
-root.bind('<Configure>', resizeApp)
-
-
-firstRow = Frame(root)
-firstRow.pack(fill=X)
-
-withLabel = Label(firstRow, text='Width: ')
-withLabel.pack(side=LEFT)
-withLabelValue = Label(firstRow, text='xxx')
-withLabelValue.pack(side=LEFT)
-
-secondRow = Frame(root)
-secondRow.pack(fill=X)
-
-heightLabel = Label(secondRow, text='Height: ')
-heightLabel.pack(side=LEFT)
-heightLabelValue = Label(secondRow, text='yyy')
-heightLabelValue.pack(side=LEFT)
-"""
 
 if __name__ == "__main__":
     mw = MainWindow()
