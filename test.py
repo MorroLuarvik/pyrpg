@@ -35,14 +35,18 @@ class MainWindow:
 		self.actionButton = Button(self.root, text='Action!')
 		self.actionButton.pack()
 
-		self.canvas = Canvas(self.root) #, bg="lightblue"
+		self.canvas = Canvas(self.root, bg="lightblue") #
 		self.canvas.pack(fill=BOTH, expand=YES)
 		
-		self.img = PhotoImage(width=100, height=100)
+		self.img = PhotoImage(width=64, height=64)
+		#self.img.blank()
 		#width=self.canvas.winfo_width(), height=self.canvas.winfo_height()
 		#img.put('#fff', (10, 20))
 		
-		#self.canvas.create_image((0, 0), image=img) #, state="normal"
+		self.img.put("#ffffff", to=(10, 20)) #, (10, 10)
+		
+		self.canvas.create_image((20, 20), image=self.img)  # , state="normal"
+		
 		
 		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
 		
@@ -69,8 +73,12 @@ class MainWindow:
 		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
 		#self.canvas.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
 		#self.img.put("#aaa", (10, 20))
-		self.canvas.create_image((0, 0), image=self.img, state="normal")
+		print(self.img.get(0, 0))
+		#self.canvas.create_image((20, 20), image=self.img)
+		#self.canvas.create_image((0, 0), image=self.img, state="normal")
 		print('click event')
+		
+		
 
 if __name__ == "__main__":
     mw = MainWindow()
