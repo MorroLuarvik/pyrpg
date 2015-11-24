@@ -49,21 +49,10 @@ class MainWindow:
 		self.canvas = tk.Canvas(self.root, bg=self.bgg) #, bg=self.bgg
 		self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
 		
-		self.img = tk.PhotoImage()
+		self.img = tk.PhotoImage() #width=800, height=600
 		#self.img.blank()
 
 		self.canvas.create_image(0, 0, image=self.img, anchor='nw')  # , state="normal", anchor='nw'
-		#self.canvas.create_image(64, 80, image=self.img)
-		
-		#self.bgg = '#00a'
-		#self.bgg = '#00a'
-		
-		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
-		
-		#self.canvas.create_rectangle(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height(), fill='red')
-		
-		#self.canvas.create_line(0, 0, 200, 100)
-		#self.canvas.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
 		
 		self._setBindings()
 		
@@ -74,27 +63,23 @@ class MainWindow:
 	def _resizeApp(self, event):
 		self.withLabelValue.config(text=self.canvas.winfo_width())
 		self.heightLabelValue.config(text=self.canvas.winfo_height())
-		#self.withLabelValue.config(text=self.root.winfo_width())
-		#self.heightLabelValue.config(text=self.root.winfo_height())
 
 	def plotPixel(self, img, x, y, color, size = 3):
 		for sy in xrange(0, size):
 			img.put('{' + (color + ' ') * size + '}', (x, y+sy))
 		
 	def _click(self, event):
-		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
-		#self.canvas.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
-		size = 10
 		for cou in xrange(0, 100):
-			self.plotPixel(self.img, self.rnd.get(self.canvas.winfo_width() - size), self.rnd.get(self.canvas.winfo_height() - size), '#{0:1X}{1:1X}{2:1X}'.format(self.rnd.get(16), self.rnd.get(16), self.rnd.get(16)), size)
-			
-		#self.canvas.create_image(0, 0, image=self.img)
-		#print(self.img.get(0, 0))
-		#self.canvas.create_image((20, 20), image=self.img)
-		#self.canvas.create_image((0, 0), image=self.img, state="normal")
-		
-		#self.canvas.config(bg=self.bgg)
-		
+			size = self.rnd.get(32) + 1
+			self.plotPixel(
+				self.img, 
+				self.rnd.get(self.canvas.winfo_width() - size), 
+				self.rnd.get(self.canvas.winfo_height() - size), 
+				'#{0:1X}{1:1X}{2:1X}'.format(
+					self.rnd.get(16), 
+					self.rnd.get(16), 
+					self.rnd.get(16)), 
+				size)
 		
 
 if __name__ == "__main__":
