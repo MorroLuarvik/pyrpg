@@ -1,52 +1,67 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from Tkinter import *
+try:
+    # Python2
+    import Tkinter as tk
+except ImportError:
+    # Python3
+    import tkinter as tk
+
 from rnd import Rnd
+
+#global img
 
 class MainWindow:
 	def __init__(self):
 		self._createUI()
+		self.rnd = Rnd()
 		
 	def start(self):
 		self.root.mainloop()
 		
 	def _createUI(self):
-		self.root = Tk()
+		self.root = tk.Tk()
 		self.root.title('Test application')
 		self.root.geometry('600x400')
 		
-		self.firstRow = Frame(self.root)
-		self.firstRow.pack(fill=X)
+		self.firstRow = tk.Frame(self.root)
+		self.firstRow.pack(fill=tk.X)
 
-		self.withLabel = Label(self.firstRow, text='Width: ')
-		self.withLabel.pack(side=LEFT)
-		self.withLabelValue = Label(self.firstRow, text='xxx')
-		self.withLabelValue.pack(side=LEFT)
+		self.withLabel = tk.Label(self.firstRow, text='Width: ')
+		self.withLabel.pack(side=tk.LEFT)
+		self.withLabelValue = tk.Label(self.firstRow, text='xxx')
+		self.withLabelValue.pack(side=tk.LEFT)
 
-		self.secondRow = Frame(self.root)
-		self.secondRow.pack(fill=X)
+		self.secondRow = tk.Frame(self.root)
+		self.secondRow.pack(fill=tk.X)
 
-		self.heightLabel = Label(self.secondRow, text='Height: ')
-		self.heightLabel.pack(side=LEFT)
-		self.heightLabelValue = Label(self.secondRow, text='yyy')
-		self.heightLabelValue.pack(side=LEFT)
+		self.heightLabel = tk.Label(self.secondRow, text='Height: ')
+		self.heightLabel.pack(side=tk.LEFT)
+		self.heightLabelValue = tk.Label(self.secondRow, text='yyy')
+		self.heightLabelValue.pack(side=tk.LEFT)
 		
-		self.actionButton = Button(self.root, text='Action!')
+		self.actionButton = tk.Button(self.root, text='Action!')
 		self.actionButton.pack()
 
-		self.canvas = Canvas(self.root, bg="lightblue") #
-		self.canvas.pack(fill=BOTH, expand=YES)
+		self.bgg = '#fff';
 		
-		self.img = PhotoImage(width=64, height=64)
+		self.canvas = tk.Canvas(self.root) #, bg=self.bgg
+		self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
+		
+		self.img = tk.PhotoImage()
 		#self.img.blank()
 		#width=self.canvas.winfo_width(), height=self.canvas.winfo_height()
 		#img.put('#fff', (10, 20))
 		
-		self.img.put("#ffffff", to=(10, 20)) #, (10, 10)
+		#for x in range(0, 64):
+		#	self.img.put('#111', (x, 32))
+
+		self.canvas.create_image(0, 0, image=self.img, anchor='nw')  # , state="normal", anchor='nw'
+		#self.canvas.create_image(64, 80, image=self.img)
 		
-		self.canvas.create_image((20, 20), image=self.img)  # , state="normal"
-		
+		#self.bgg = '#00a'
+		#self.bgg = '#00a'
 		
 		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
 		
@@ -54,8 +69,6 @@ class MainWindow:
 		
 		#self.canvas.create_line(0, 0, 200, 100)
 		#self.canvas.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
-		
-		
 		
 		self._setBindings()
 		
@@ -69,14 +82,23 @@ class MainWindow:
 		#self.withLabelValue.config(text=self.root.winfo_width())
 		#self.heightLabelValue.config(text=self.root.winfo_height())
 
+	def plotPixel(self, img, x, y, color, size = 3):
+		for sy in xrange(0, size):
+			img.put('{' + (color + ' ') * size + '}', (x, y+sy))
+		
 	def _click(self, event):
 		#self.canvas.create_line(0, 0, self.canvas.winfo_width(), self.canvas.winfo_height())
 		#self.canvas.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
-		#self.img.put("#aaa", (10, 20))
-		print(self.img.get(0, 0))
+		size = 10
+		for cou in xrange(0, 100):
+			self.plotPixel(self.img, self.rnd.get(self.canvas.winfo_width() - size), self.rnd.get(self.canvas.winfo_height() - size), '#{0:1X}{1:1X}{2:1X}'.format(self.rnd.get(16), self.rnd.get(16), self.rnd.get(16)), size)
+			
+		#self.canvas.create_image(0, 0, image=self.img)
+		#print(self.img.get(0, 0))
 		#self.canvas.create_image((20, 20), image=self.img)
 		#self.canvas.create_image((0, 0), image=self.img, state="normal")
-		print('click event')
+		
+		#self.canvas.config(bg=self.bgg)
 		
 		
 
