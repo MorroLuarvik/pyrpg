@@ -10,6 +10,7 @@ except ImportError:
 
 from time import time
 from rnd import Rnd
+from particle import Particle
 
 #global img
 
@@ -20,6 +21,8 @@ class MainWindow:
 		self.rnd = Rnd()
 		self.frameTime = 40
 		
+		self.part = None
+			
 	def start(self):
 		self.root.mainloop()
 		
@@ -59,7 +62,7 @@ class MainWindow:
 		self.otherButton = tk.Button(self.thirdRow, text='other', width=10, padx=10)
 		self.otherButton.pack(side=tk.LEFT)
 
-		self.bgg = '#fff';
+		self.bgg = '#111';
 		
 		self.canvas = tk.Canvas(self.root, bg=self.bgg) #, bg=self.bgg
 		self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
@@ -87,6 +90,11 @@ class MainWindow:
 						self.rnd.get(16), 
 						self.rnd.get(16)), 
 					size)
+		
+		if self.part: 
+			self.part.animate(self.particleImg)
+			#print(self.part.elems)
+		
 				
 		execTime = int((time() - startTime) * 1000)
 		if execTime:
@@ -120,18 +128,24 @@ class MainWindow:
 			self.actionButton.config(text='Pause')
 
 	def _otherAction(self, event):
-		self.otherImg = tk.PhotoImage(file='mark')
+		#self.otherImg = tk.PhotoImage(file='mark')
 		#self.otherImg = tk.PhotoImage(width=16, height=16)
 		
-		self.otherImg.put('#f11', (0, 0, 7, 7))
-		self.otherImg.put('#111', (1, 1, 6, 6))
-		self.otherImg.put('#11f', (8, 8, 16, 16))
+		#self.otherImg.put('#f11', (0, 0, 7, 7))
+		#self.otherImg.put('#111', (1, 1, 6, 6))
+		#self.otherImg.put('#11f', (8, 8, 16, 16))
 		
-		self.canvas.create_image(100, 100, image=self.otherImg, anchor='nw')  # , state="normal", anchor='nw'
+		#self.canvas.create_image(100, 100, image=self.otherImg, anchor='nw')  # , state="normal", anchor='nw'
 		
 		#self.otherImg.write('mark')
 		
-		print(self.otherImg)
+		#print(self.otherImg)
+		
+		self.part = Particle(self.rnd)
+		self.particleImg = tk.PhotoImage(width=128, height=128)
+		self.canvas.create_image(100, 100, image=self.particleImg, anchor='nw')
+		
+		print(self.part.elems)
 		print('_otherAction')
 		#self.otherImg.blank()
 			
