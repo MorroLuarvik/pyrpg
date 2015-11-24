@@ -69,7 +69,7 @@ class MainWindow:
 		if not(self.paused):
 			#self.img.blank()
 		
-			for cou in xrange(0, 100):
+			for cou in xrange(0, 20):
 				size = self.rnd.get(32)
 				self.plotPixel(
 					self.img, 
@@ -106,19 +106,10 @@ class MainWindow:
 		
 	def _click(self, event):
 		self.paused = not(self.paused)
-		"""
-		for cou in xrange(0, 100):
-			size = self.rnd.get(32) + 1
-			self.plotPixel(
-				self.img, 
-				self.rnd.get(self.canvas.winfo_width() - size), 
-				self.rnd.get(self.canvas.winfo_height() - size), 
-				'#{0:1X}{1:1X}{2:1X}'.format(
-					self.rnd.get(16), 
-					self.rnd.get(16), 
-					self.rnd.get(16)), 
-				size)
-		"""
+		if self.paused:
+			self.actionButton.config(text='Action!')
+		else:
+			self.actionButton.config(text='Pause')
 
 if __name__ == "__main__":
     mw = MainWindow()
