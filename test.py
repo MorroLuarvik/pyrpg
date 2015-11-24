@@ -38,6 +38,9 @@ class MainWindow:
 
 		self.secondRow = tk.Frame(self.root)
 		self.secondRow.pack(fill=tk.X)
+		
+		self.thirdRow = tk.Frame(self.root)
+		self.thirdRow.pack(fill=tk.X)
 
 		self.heightLabel = tk.Label(self.secondRow, text='Height: ')
 		self.heightLabel.pack(side=tk.LEFT)
@@ -47,8 +50,14 @@ class MainWindow:
 		self.speedLabelValue = tk.Label(self.secondRow, text='speed')
 		self.speedLabelValue.pack(side=tk.LEFT)
 		
-		self.actionButton = tk.Button(self.root, text='Action!')
-		self.actionButton.pack()
+		self.actionButton = tk.Button(self.thirdRow, text='Animate', width=10)
+		self.actionButton.pack(side=tk.LEFT)
+		
+		self.spaceLabel = tk.Label(self.thirdRow, text='   ')
+		self.spaceLabel.pack(side=tk.LEFT)
+		
+		self.otherButton = tk.Button(self.thirdRow, text='other', width=10, padx=10)
+		self.otherButton.pack(side=tk.LEFT)
 
 		self.bgg = '#fff';
 		
@@ -67,8 +76,6 @@ class MainWindow:
 	def animate(self):
 		startTime = time()
 		if not(self.paused):
-			#self.img.blank()
-		
 			for cou in xrange(0, 20):
 				size = self.rnd.get(32)
 				self.plotPixel(
@@ -94,6 +101,7 @@ class MainWindow:
 	def _setBindings(self):
 		self.root.bind('<Configure>', self._resizeApp)
 		self.actionButton.bind('<Button-1>', self._click)
+		self.otherButton.bind('<Button-1>', self._otherAction)
 
 	def _resizeApp(self, event):
 		self.withLabelValue.config(text=self.canvas.winfo_width())
@@ -107,10 +115,26 @@ class MainWindow:
 	def _click(self, event):
 		self.paused = not(self.paused)
 		if self.paused:
-			self.actionButton.config(text='Action!')
+			self.actionButton.config(text='Animate')
 		else:
 			self.actionButton.config(text='Pause')
 
+	def _otherAction(self, event):
+		self.otherImg = tk.PhotoImage(file='mark')
+		#self.otherImg = tk.PhotoImage(width=16, height=16)
+		
+		self.otherImg.put('#f11', (0, 0, 7, 7))
+		self.otherImg.put('#111', (1, 1, 6, 6))
+		self.otherImg.put('#11f', (8, 8, 16, 16))
+		
+		self.canvas.create_image(100, 100, image=self.otherImg, anchor='nw')  # , state="normal", anchor='nw'
+		
+		#self.otherImg.write('mark')
+		
+		print(self.otherImg)
+		print('_otherAction')
+		#self.otherImg.blank()
+			
 if __name__ == "__main__":
     mw = MainWindow()
     mw.start()
