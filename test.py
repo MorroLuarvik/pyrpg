@@ -46,16 +46,11 @@ class MainWindow:
 
 		self.bgg = '#fff';
 		
-		self.canvas = tk.Canvas(self.root) #, bg=self.bgg
+		self.canvas = tk.Canvas(self.root, bg=self.bgg) #, bg=self.bgg
 		self.canvas.pack(fill=tk.BOTH, expand=tk.YES)
 		
 		self.img = tk.PhotoImage()
 		#self.img.blank()
-		#width=self.canvas.winfo_width(), height=self.canvas.winfo_height()
-		#img.put('#fff', (10, 20))
-		
-		#for x in range(0, 64):
-		#	self.img.put('#111', (x, 32))
 
 		self.canvas.create_image(0, 0, image=self.img, anchor='nw')  # , state="normal", anchor='nw'
 		#self.canvas.create_image(64, 80, image=self.img)
