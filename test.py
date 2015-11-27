@@ -22,6 +22,7 @@ class MainWindow:
 		self.frameTime = 40
 		
 		self.part = None
+		self.particleImgId = None
 			
 	def start(self):
 		self.root.mainloop()
@@ -86,9 +87,9 @@ class MainWindow:
 					self.rnd.get(self.canvas.winfo_width() - size), 
 					self.rnd.get(self.canvas.winfo_height() - size), 
 					'#{0:1X}{1:1X}{2:1X}'.format(
-						self.rnd.get(16), 
-						self.rnd.get(16), 
-						self.rnd.get(16)), 
+						self.rnd.get(10), 
+						self.rnd.get(10), 
+						self.rnd.get(10)), 
 					size)
 		
 		if self.part: 
@@ -142,10 +143,16 @@ class MainWindow:
 		#print(self.otherImg)
 		
 		self.part = Particle(self.rnd)
-		self.particleImg = tk.PhotoImage(width=128, height=128)
-		self.canvas.create_image(100, 100, image=self.particleImg, anchor='nw')
+		self.particleImg = tk.PhotoImage(width=192, height=192)
 		
-		print(self.part.elems)
+		if (self.particleImgId):
+			self.canvas.delete(self.particleImgId)
+			
+		self.particleImgId = self.canvas.create_image(100, self.canvas.winfo_height()-self.particleImg.height(), image=self.particleImg, anchor='nw')
+		
+		#print(self.part.elems)
+		print('created: {}'.format(self.particleImgId))
+		print(self.canvas.find_all())
 		print('_otherAction')
 		#self.otherImg.blank()
 			

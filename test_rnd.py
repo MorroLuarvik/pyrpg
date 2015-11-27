@@ -28,3 +28,16 @@ while simples[-1] < end:
 print(simples[-1])
 print(simples[-20])
 print(simples[-30])
+
+
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
+print(rnd.get(2))
